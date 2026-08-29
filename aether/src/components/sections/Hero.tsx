@@ -54,7 +54,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="absolute bottom-32 left-[clamp(1.5rem,5vw,8rem)] max-w-3xl">
+        <div className="absolute top-[-40vh] left-[clamp(1.5rem,5vw,8rem)] max-w-3xl">
           <h1 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] font-bold tracking-[-0.03em] uppercase mb-6">
             <span className="block text-foreground">Energia</span>
             <span className="block text-foreground">Sem</span>
