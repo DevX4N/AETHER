@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -110,10 +110,10 @@ function EnergyCore({ mouse, reducedMotion }: { mouse: React.RefObject<THREE.Vec
     glowMatRef.current = glowMaterial;
   }, [innerMaterial, glowMaterial]);
 
-  useFrame((state) => {
-    if (reducedMotion) return;
+useFrame((state) => {
+  console.log("ANIMANDO", state.clock.getElapsedTime());
 
-    const t = state.clock.getElapsedTime();
+  const t = state.clock.getElapsedTime();
 
     const iMat = innerMatRef.current;
     const gMat = glowMatRef.current;
@@ -248,10 +248,21 @@ export default function AetherCore({
   scale?: number;
 }) {
   const mouseRef = useRef(new THREE.Vector2(0, 0));
-  const reducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
 
+  const [reducedMotion, setReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  
+    setReducedMotion(media.matches);
+  
+    const handler = () => setReducedMotion(media.matches);
+  
+    media.addEventListener("change", handler);
+  
+    return () => media.removeEventListener("change", handler);
+  }, []);
+  
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -267,6 +278,7 @@ export default function AetherCore({
       style={{ transform: `scale(${scale})` }}
     >
       <Canvas
+        frameloop="always"
         dpr={[1, 1.5]}
         gl={{
           antialias: true,
