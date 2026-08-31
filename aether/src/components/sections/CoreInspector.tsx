@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { CORE_LAYERS } from "@/lib/types";
+import Reveal from "@/components/ui/Reveal";
 
 export default function CoreInspector() {
   const [activeLayer, setActiveLayer] = useState<string>("field");
   const active = CORE_LAYERS.find((l) => l.id === activeLayer) || CORE_LAYERS[0];
 
   return (
-    <section id="technology" className="relative py-32 md:py-48 bg-surface">
+    <Reveal>
+      <section id="technology" className="relative py-32 md:py-48 bg-surface">
       <div className="section-padding">
         <div className="mb-12">
           <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-foreground-dim mb-4">
@@ -146,5 +148,6 @@ export default function CoreInspector() {
         </div>
       </div>
     </section>
+  </Reveal>
   );
 }
