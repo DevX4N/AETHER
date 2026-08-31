@@ -12,7 +12,7 @@ export default function Statement() {
     >
       <div className="section-padding w-full h-full relative">
         <div
-          className={`absolute top-0 left-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
