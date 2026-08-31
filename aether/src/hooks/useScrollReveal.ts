@@ -10,7 +10,7 @@ interface UseScrollRevealOptions {
 
 export function useScrollReveal({
   threshold = 0.2,
-  rootMargin = "0px",
+  rootMargin = "0px 0px -150px 0px",
   once = true,
 }: UseScrollRevealOptions = {}) {
   const ref = useRef<HTMLDivElement>(null);
