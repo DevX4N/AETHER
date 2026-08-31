@@ -1,13 +1,11 @@
 "use client";
 
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import Reveal from "@/components/ui/Reveal";
 import { SCALE_APPLICATIONS } from "@/lib/types";
 
 export default function ScaleApplications() {
-  const { ref, visible } = useScrollReveal({ threshold: 0.2 });
-
   return (
-    <section ref={ref} className="relative py-32 md:py-48">
+    <section className="relative py-32 md:py-48">
       <div className="section-padding mb-16">
         <div className="line-technical-bright" />
       </div>
@@ -21,13 +19,8 @@ export default function ScaleApplications() {
       </div>
 
       <div className="space-y-0">
-        {SCALE_APPLICATIONS.map((app) => (
-          <div
-            key={app.id}
-            className={`group relative border-t border-border hover:border-border-bright transition-all duration-700 ${
-              visible ? "opacity-100" : "opacity-0"
-            }`}
-          >
+        {SCALE_APPLICATIONS.map((app, index) => (
+          <Reveal key={app.id} direction="left" className="group relative border-t border-border hover:border-border-bright transition-all duration-700">
             <div className="section-padding py-8 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center">
               <div className="md:col-span-3">
                 <h3 className="font-display text-lg md:text-xl tracking-[0.15em] uppercase text-foreground group-hover:text-energy-glow transition-colors duration-500">
@@ -49,7 +42,7 @@ export default function ScaleApplications() {
             </div>
 
             <div className="absolute inset-0 bg-gradient-to-r from-energy-glow/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
