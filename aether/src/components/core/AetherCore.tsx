@@ -110,10 +110,8 @@ function EnergyCore({ mouse, reducedMotion }: { mouse: React.RefObject<THREE.Vec
     glowMatRef.current = glowMaterial;
   }, [innerMaterial, glowMaterial]);
 
-useFrame((state) => {
-  console.log("ANIMANDO", state.clock.getElapsedTime());
-
-  const t = state.clock.getElapsedTime();
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
 
     const iMat = innerMatRef.current;
     const gMat = glowMatRef.current;
