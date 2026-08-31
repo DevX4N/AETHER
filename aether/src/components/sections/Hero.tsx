@@ -37,7 +37,7 @@ export default function Hero() {
 
       <div className="relative z-20 section-padding w-full pointer-events-none">
         <div className="absolute top-20 left-[clamp(1.5rem,5vw,8rem)]">
-          <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-foreground-dim space-y-1">
+         <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/80 space-y-1">
             <p>AETHER / CORE-01</p>
             <p>Arquitetura Energética Experimental</p>
             <p className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export default function Hero() {
             <span className="block text-gradient-energy">Limites.</span>
           </h1>
 
-          <p className="font-display text-sm md:text-base text-foreground-muted leading-relaxed max-w-md mb-8">
+          <p className="font-display text-sm md:text-base text-white/75 leading-relaxed max-w-md mb-8">
             Uma nova geração de sistemas de energia compactos projetados para
             alimentar o que vem a seguir.
           </p>
