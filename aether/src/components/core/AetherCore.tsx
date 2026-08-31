@@ -186,15 +186,15 @@ function EnergyCore({ mouse, reducedMotion }: { mouse: React.RefObject<THREE.Vec
 
       <mesh ref={ringRef1}>
         <torusGeometry args={[1.6, 0.008, 16, 100]} />
-        <meshBasicMaterial color="var(--color-energy-glow)" transparent opacity={0.35} />
+        <meshBasicMaterial color="#00d9ff" transparent opacity={0.35} />
       </mesh>
       <mesh ref={ringRef2} rotation={[Math.PI / 3, 0, 0]}>
         <torusGeometry args={[1.8, 0.006, 16, 100]} />
-        <meshBasicMaterial color="var(--color-energy-glow)" transparent opacity={0.2} />
+        <meshBasicMaterial color="#00d9ff" transparent opacity={0.2} />
       </mesh>
       <mesh ref={ringRef3} rotation={[0, Math.PI / 3, Math.PI / 6]}>
         <torusGeometry args={[2.0, 0.005, 16, 100]} />
-        <meshBasicMaterial color="var(--color-energy)" transparent opacity={0.15} />
+        <meshBasicMaterial color="#0077ff" transparent opacity={0.15} />
       </mesh>
 
       <points ref={particlesRef}>
@@ -210,7 +210,7 @@ function EnergyCore({ mouse, reducedMotion }: { mouse: React.RefObject<THREE.Vec
         </bufferGeometry>
         <pointsMaterial
           size={0.015}
-          color="var(--color-energy-glow)"
+          color="#00d9ff"
           transparent
           opacity={0.6}
           sizeAttenuation
@@ -233,8 +233,8 @@ function Scene({ mouse, reducedMotion }: { mouse: React.RefObject<THREE.Vector2>
   return (
     <>
       <ambientLight intensity={0.1} />
-      <pointLight position={[5, 5, 5]} intensity={0.5} color="var(--color-energy-glow)" />
-      <pointLight position={[-5, -3, 3]} intensity={0.3} color="var(--color-plasma)" />
+      <pointLight position={[5, 5, 5]} intensity={0.5} color="#00d9ff" />
+      <pointLight position={[-5, -3, 3]} intensity={0.3} color="#8b5cf6" />
       <EnergyCore mouse={mouse} reducedMotion={reducedMotion} />
     </>
   );
