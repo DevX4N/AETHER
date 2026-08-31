@@ -9,8 +9,8 @@ export default function CoreInspector() {
   const active = CORE_LAYERS.find((l) => l.id === activeLayer) || CORE_LAYERS[0];
 
   return (
-    <Reveal>
       <section id="technology" className="relative py-32 md:py-48 bg-surface">
+      <Reveal direction="left">
       <div className="section-padding">
         <div className="mb-12">
           <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-foreground-dim mb-4">
@@ -147,7 +147,7 @@ export default function CoreInspector() {
           </div>
         </div>
       </div>
+    </Reveal>
     </section>
-  </Reveal>
   );
 }
