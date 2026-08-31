@@ -1,20 +1,9 @@
 "use client";
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useEffect, useState } from "react";
 
 export default function Statement() {
   const { ref, visible } = useScrollReveal({ threshold: 0.3 });
-  const [showSecond, setShowSecond] = useState(false);
-
-  useEffect(() => {
-    if (!visible) {
-      setShowSecond(false);
-      return;
-    }
-    const timer = setTimeout(() => setShowSecond(true), 2500);
-    return () => clearTimeout(timer);
-  }, [visible]);
 
   return (
     <section
@@ -24,9 +13,7 @@ export default function Statement() {
       <div className="section-padding w-full text-center">
         <div
           className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showSecond
-              ? "opacity-0 -translate-y-8 pointer-events-none"
-              : "opacity-100 translate-y-0"
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <h2 className="font-display text-[clamp(2rem,6vw,5rem)] leading-[0.9] font-bold tracking-[-0.03em] uppercase max-w-4xl mx-auto">
@@ -37,10 +24,8 @@ export default function Statement() {
         </div>
 
         <div
-          className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            showSecond
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8 pointer-events-none"
+          className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <h2 className="font-display text-[clamp(2rem,6vw,5rem)] leading-[0.9] font-bold tracking-[-0.03em] uppercase max-w-4xl mx-auto">
