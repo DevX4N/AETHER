@@ -9,7 +9,7 @@ interface UseScrollRevealOptions {
 }
 
 export function useScrollReveal({
-  threshold = 0.7,
+  threshold = 0.2,
   rootMargin = "0px",
   once = true,
 }: UseScrollRevealOptions = {}) {
