@@ -11,7 +11,7 @@ interface UseScrollRevealOptions {
 
 export function useScrollReveal({
   threshold = 0.15,
-  rootMargin = "0px 0px -50px 0px",
+  rootMargin = "0px 0px -10% 0px",
   once = false,
   disabled = false,
 }: UseScrollRevealOptions = {}) {
@@ -22,14 +22,37 @@ export function useScrollReveal({
   useEffect(() => {
     if (disabled) return;
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      setVisible(true);
-      return;
-    }
-
     const el = ref.current;
     if (!el) return;
+
+    const mobile = window.innerWidth < 768;
+    const effectiveThreshold = mobile ? Math.min(threshold, 0.12) : threshold;
+    const effectiveRootMargin = mobile ? "0px 0px -20% 0px" : rootMargin;
+
+    const checkVisibility = () => {
+      const rect = el.getBoundingClientRect();
+      const triggerPoint = window.innerHeight * (mobile ? 0.95 : 0.88);
+      const inView = rect.top < triggerPoint && rect.bottom > 0;
+
+      if (inView) {
+        setVisible(true);
+        if (once && observerRef.current) {
+          observerRef.current.disconnect();
+        }
+      } else if (!once) {
+        setVisible(false);
+      }
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      checkVisibility();
+      window.addEventListener("scroll", checkVisibility, { passive: true });
+      window.addEventListener("resize", checkVisibility);
+      return () => {
+        window.removeEventListener("scroll", checkVisibility);
+        window.removeEventListener("resize", checkVisibility);
+      };
+    }
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
@@ -42,10 +65,11 @@ export function useScrollReveal({
           setVisible(false);
         }
       },
-      { threshold, rootMargin }
+      { threshold: effectiveThreshold, rootMargin: effectiveRootMargin }
     );
 
     observerRef.current.observe(el);
+    checkVisibility();
     return () => observerRef.current?.disconnect();
   }, [threshold, rootMargin, once, disabled]);
 
