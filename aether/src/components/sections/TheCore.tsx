@@ -51,31 +51,33 @@ export default function TheCore() {
               <button
                 key={layer.id}
                 onClick={() => setActiveLayer(i)}
-                className={`w-full text-left flex items-center gap-4 py-4 border-t border-border transition-all duration-500 group ${
-                  activeLayer === i ? "opacity-100" : "opacity-60 hover:opacity-80"
+                className={`w-full cursor-pointer text-left flex items-center gap-4 py-4 px-2 border-t border-border transition-all duration-500 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-energy-glow/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                  activeLayer === i
+                    ? "opacity-100 bg-surface/60 border-border-bright shadow-[inset_0_0_0_1px_rgba(184,224,255,0.15)]"
+                    : "opacity-60 hover:opacity-100 hover:border-border-bright hover:bg-surface/40"
                 }`}
                 aria-label={`Explorar camada: ${layer.name}`}
                 aria-pressed={activeLayer === i}
               >
                 <div
-                  className="w-2 h-2 rounded-full shrink-0 transition-all duration-500"
+                  className="w-2.5 h-2.5 rounded-full shrink-0 transition-all duration-500 group-hover:scale-110"
                   style={{
                     backgroundColor: activeLayer === i ? layer.color : "var(--color-border-bright)",
                     boxShadow: activeLayer === i ? `0 0 10px ${layer.color}50` : "none",
                   }}
                 />
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-foreground-dim mb-1">
                     {layer.label}
                   </div>
                   <div
-                    className="font-display text-sm tracking-[0.05em] transition-colors duration-500"
+                    className="font-display text-sm tracking-[0.05em] transition-all duration-500 group-hover:translate-x-0.5"
                     style={{ color: activeLayer === i ? layer.color : "var(--color-foreground-muted)" }}
                   >
                     {layer.name}
                   </div>
                 </div>
-                <div className="hidden md:flex gap-4">
+                <div className="hidden md:flex gap-4 items-center">
                   {layer.metrics.slice(0, 2).map((m) => (
                     <div key={m.label} className="text-right">
                       <div className="font-mono text-[8px] tracking-[0.15em] uppercase text-foreground-dim">
@@ -89,6 +91,17 @@ export default function TheCore() {
                       </div>
                     </div>
                   ))}
+                  <span
+                    className="ml-2 flex h-6 w-6 items-center justify-center rounded-full border text-[12px] font-bold transition-all duration-500"
+                    style={{
+                      borderColor: activeLayer === i ? layer.color : "var(--color-border-bright)",
+                      color: activeLayer === i ? layer.color : "var(--color-foreground-dim)",
+                      backgroundColor: activeLayer === i ? `${layer.color}12` : "transparent",
+                    }}
+                    aria-hidden="true"
+                  >
+                    ›
+                  </span>
                 </div>
               </button>
             ))}
