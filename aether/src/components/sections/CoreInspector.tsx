@@ -30,17 +30,17 @@ export default function CoreInspector() {
                 <button
                   key={layer.id}
                   onClick={() => setActiveLayer(layer.id)}
-                  className={`w-full text-left px-4 py-4 border border-border transition-all duration-500 group ${
+                  className={`w-full cursor-pointer text-left px-4 py-4 border border-border transition-all duration-500 group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-energy-glow/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                     activeLayer === layer.id
-                      ? "bg-surface border-border-bright"
-                      : "hover:bg-surface/50 hover:border-border-bright/50"
+                      ? "bg-surface border-border-bright shadow-[inset_0_0_0_1px_rgba(184,224,255,0.15)]"
+                      : "hover:bg-surface/70 hover:border-border-bright/70 hover:translate-x-0.5"
                   }`}
                   aria-label={`Explorar camada: ${layer.name}`}
                   aria-pressed={activeLayer === layer.id}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                      className={`w-2 h-2 rounded-full transition-all duration-500 group-hover:scale-110 ${
                         activeLayer === layer.id
                           ? "shadow-[0_0_8px_rgba(184,224,255,0.5)]"
                           : ""
@@ -51,13 +51,24 @@ export default function CoreInspector() {
                       }}
                     />
                     <span
-                      className={`font-display text-xs tracking-[0.15em] uppercase transition-colors duration-500 ${
+                      className={`font-display text-xs tracking-[0.15em] uppercase transition-all duration-500 ${
                         activeLayer === layer.id
-                          ? "text-foreground"
+                          ? "text-foreground font-bold"
                           : "text-foreground-muted group-hover:text-foreground"
                       }`}
                     >
                       {layer.name}
+                    </span>
+                    <span
+                      className="ml-auto flex h-5 w-5 items-center justify-center rounded-full border text-[11px] font-bold transition-all duration-500"
+                      style={{
+                        borderColor: activeLayer === layer.id ? layer.color : "var(--color-border-bright)",
+                        color: activeLayer === layer.id ? layer.color : "var(--color-foreground-dim)",
+                        backgroundColor: activeLayer === layer.id ? `${layer.color}12` : "transparent",
+                      }}
+                      aria-hidden="true"
+                    >
+                      ›
                     </span>
                   </div>
                 </button>
